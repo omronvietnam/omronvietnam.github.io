@@ -1,0 +1,89 @@
+@page {
+    size: A3;
+    margin-top: 5cm;
+    margin-bottom: 0cm;
+    margin-left: 1cm;
+    margin-right: 1cm;
+    @bottom-right {
+      content: "1Page " counter(page) " of " counter(pages);
+    }
+    @footnote {
+      border-top: 1pt solid black;
+    }
+}
+.fn {
+  float: footnote;
+  counter-increment: footnote;
+}
+
+.fn::footnote-call {
+  content: counter(footnote);
+  font-size: 9pt;
+  vertical-align: super;
+  line-height: none;
+}
+
+.fn::footnote-marker {
+  font-weight: bold;
+}
+
+h1 {
+  string-set: doctitle content();
+  page-break-before: always;
+}
+h1, h2, h3, h4, h5 {
+  page-break-after: avoid;
+}
+table, figure {
+  page-break-inside: avoid;
+}
+h1+p, h2+p, h3+p {
+  page-break-before: avoid;
+}
+
+@page:right{
+  margin-left: 2cm;
+  @bottom-right {
+    content: counter(page);
+  }
+  @top-right {
+    content: string(doctitle);
+    margin: 30pt 0 10pt 0;
+    font-size: 8pt;
+  }
+}
+
+@page:left{
+  margin-left: 2cm;
+  @bottom-left {
+    content: counter(page);
+  }
+}
+p{
+  page-break-after: auto
+}
+#printme {
+  display: none;
+}
+/* @media print {
+  #printme {
+      display: block;
+  }
+} */
+/* page {
+width: 21cm;
+background: white;
+display: block;
+margin: 0 auto;
+box-shadow: 0 0 0.5cm rgba(0, 0, 0, 0.5);
+}
+
+page[size="A4"] {
+    width: 21cm;
+    height: 29.7cm;
+}
+
+page[size="A4"][layout="landscape"] {
+    width: 29.7cm;
+    height: 21cm;
+} */
